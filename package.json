@@ -1,6 +1,6 @@
 {
   "name": "intake-eval",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "A small evaluation harness for human-reviewed AI support triage.",
   "type": "module",
@@ -10,12 +10,16 @@
   "scripts": {
     "demo": "node src/cli.ts",
     "evaluate": "node src/cli.ts --json",
+    "benchmark": "node src/benchmark-cli.ts",
     "test": "node --test test/*.test.ts",
     "typecheck": "tsc --noEmit",
-    "check": "npm run typecheck && npm test && npm run evaluate"
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run format:check && npm run typecheck && npm test && npm run evaluate"
   },
   "devDependencies": {
-    "@types/node": "26.5.0",
+    "@types/node": "24.13.3",
+    "prettier": "3.9.6",
     "typescript": "7.0.2"
   },
   "license": "MIT"

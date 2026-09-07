@@ -1,0 +1,409 @@
+{
+  "schemaVersion": 1,
+  "mode": "live-model",
+  "createdAt": "2026-09-07T17:24:55.484Z",
+  "provider": "deepseek",
+  "requestedModel": "deepseek-v4-flash",
+  "prompt": {
+    "version": "triage-v1",
+    "sha256": "cab035aee17bba5b05989c232e9b93d4d4423327ada7f689404f350fcef01281"
+  },
+  "dataset": {
+    "sha256": "0a2b4a2fa05ed505b9d8dd9378955eb085b551f6e43a79b90d7c8088eea45903",
+    "selected": 16,
+    "attempted": 16,
+    "skipped": 0,
+    "labels": "AI-authored provisional labels; not independently human-validated"
+  },
+  "settings": {
+    "temperature": 0,
+    "maxOutputTokens": 512,
+    "retries": 0
+  },
+  "metrics": {
+    "total": 16,
+    "providerErrors": 0,
+    "rejected": 0,
+    "scorable": 16,
+    "category": {
+      "correct": 15,
+      "denominator": 16
+    },
+    "priority": {
+      "correct": 16,
+      "denominator": 16
+    },
+    "escalation": {
+      "expected": 7,
+      "missed": 1,
+      "unscorable": 0,
+      "falsePositives": 1,
+      "standardScorable": 9
+    },
+    "latencyMs": {
+      "measured": 16,
+      "p50": 1057,
+      "p95": 1822
+    },
+    "tokens": {
+      "measured": 16,
+      "input": 4232,
+      "output": 741
+    },
+    "summaryCorrectness": "not_scored_requires_human_review"
+  },
+  "rows": [
+    {
+      "id": "export-error",
+      "language": "en",
+      "expected": {
+        "category": "technical",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "technical",
+        "priority": "normal",
+        "escalation": false
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1137,
+      "usage": {
+        "inputTokens": 262,
+        "outputTokens": 33
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "duplicate-refund",
+      "language": "en",
+      "expected": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": true
+      },
+      "predicted": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": true
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1367,
+      "usage": {
+        "inputTokens": 258,
+        "outputTokens": 44
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "team-lockout",
+      "language": "en",
+      "expected": {
+        "category": "account",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "predicted": {
+        "category": "account",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1181,
+      "usage": {
+        "inputTokens": 261,
+        "outputTokens": 41
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "password-howto",
+      "language": "en",
+      "expected": {
+        "category": "account",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "account",
+        "priority": "normal",
+        "escalation": false
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 948,
+      "usage": {
+        "inputTokens": 260,
+        "outputTokens": 38
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "feature-request",
+      "language": "en",
+      "expected": {
+        "category": "other",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "other",
+        "priority": "normal",
+        "escalation": false
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1057,
+      "usage": {
+        "inputTokens": 260,
+        "outputTokens": 43
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "negated-refund",
+      "language": "en",
+      "expected": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": true
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 883,
+      "usage": {
+        "inputTokens": 262,
+        "outputTokens": 46
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "active-security",
+      "language": "en",
+      "expected": {
+        "category": "account",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "predicted": {
+        "category": "technical",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 928,
+      "usage": {
+        "inputTokens": 264,
+        "outputTokens": 47
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "resolved-outage",
+      "language": "en",
+      "expected": {
+        "category": "technical",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "technical",
+        "priority": "normal",
+        "escalation": false
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1334,
+      "usage": {
+        "inputTokens": 263,
+        "outputTokens": 51
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "source-injection",
+      "language": "en",
+      "expected": {
+        "category": "account",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "account",
+        "priority": "normal",
+        "escalation": false
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 964,
+      "usage": {
+        "inputTokens": 271,
+        "outputTokens": 41
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "unauthorized-charge",
+      "language": "en",
+      "expected": {
+        "category": "billing",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "predicted": {
+        "category": "billing",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 844,
+      "usage": {
+        "inputTokens": 262,
+        "outputTokens": 46
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "close-account",
+      "language": "en",
+      "expected": {
+        "category": "account",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "account",
+        "priority": "normal",
+        "escalation": false
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1084,
+      "usage": {
+        "inputTokens": 267,
+        "outputTokens": 39
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "core-outage",
+      "language": "en",
+      "expected": {
+        "category": "technical",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "predicted": {
+        "category": "technical",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1822,
+      "usage": {
+        "inputTokens": 264,
+        "outputTokens": 52
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "hr-refund",
+      "language": "hr",
+      "expected": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": true
+      },
+      "predicted": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": false
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1151,
+      "usage": {
+        "inputTokens": 268,
+        "outputTokens": 55
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "hr-password",
+      "language": "hr",
+      "expected": {
+        "category": "account",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "account",
+        "priority": "normal",
+        "escalation": false
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 984,
+      "usage": {
+        "inputTokens": 265,
+        "outputTokens": 49
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "hr-team-lockout",
+      "language": "hr",
+      "expected": {
+        "category": "account",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "predicted": {
+        "category": "account",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1184,
+      "usage": {
+        "inputTokens": 275,
+        "outputTokens": 60
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "hr-feature-request",
+      "language": "hr",
+      "expected": {
+        "category": "other",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "other",
+        "priority": "normal",
+        "escalation": false
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 962,
+      "usage": {
+        "inputTokens": 270,
+        "outputTokens": 56
+      },
+      "model": "deepseek-v4-flash"
+    }
+  ]
+}

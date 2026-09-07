@@ -1,0 +1,162 @@
+[
+  {
+    "id": "export-error",
+    "output": "{\"summary\":\"Export fails after selecting September.\",\"category\":\"technical\",\"priority\":\"normal\",\"evidence\":[\"The export button gives an error after I select September.\"]}",
+    "model": "deepseek-v4-flash",
+    "latencyMs": 1137,
+    "usage": {
+      "inputTokens": 262,
+      "outputTokens": 33
+    }
+  },
+  {
+    "id": "duplicate-refund",
+    "output": "{\"summary\":\"User reports being billed twice and requests a refund for the duplicate payment.\",\"category\":\"billing\",\"priority\":\"normal\",\"evidence\":[\"I was billed twice yesterday.\",\"Please refund the duplicate payment.\"]}",
+    "model": "deepseek-v4-flash",
+    "latencyMs": 1367,
+    "usage": {
+      "inputTokens": 258,
+      "outputTokens": 44
+    }
+  },
+  {
+    "id": "team-lockout",
+    "output": "{\"summary\":\"Team-wide login failure prevents workspace access.\",\"category\":\"account\",\"priority\":\"urgent\",\"evidence\":[\"Nobody on my team can log in today.\",\"We cannot access our workspace.\"]}",
+    "model": "deepseek-v4-flash",
+    "latencyMs": 1181,
+    "usage": {
+      "inputTokens": 261,
+      "outputTokens": 41
+    }
+  },
+  {
+    "id": "password-howto",
+    "output": "{\"summary\":\"User asks how to change their password while still able to sign in normally.\",\"category\":\"account\",\"priority\":\"normal\",\"evidence\":[\"How do I change my password?\"]}",
+    "model": "deepseek-v4-flash",
+    "latencyMs": 948,
+    "usage": {
+      "inputTokens": 260,
+      "outputTokens": 38
+    }
+  },
+  {
+    "id": "feature-request",
+    "output": "{\"summary\":\"User requests a dark theme for the dashboard in a future update.\",\"category\":\"other\",\"priority\":\"normal\",\"evidence\":[\"Could you add a dark theme to the dashboard in a future update?\"]}",
+    "model": "deepseek-v4-flash",
+    "latencyMs": 1057,
+    "usage": {
+      "inputTokens": 260,
+      "outputTokens": 43
+    }
+  },
+  {
+    "id": "negated-refund",
+    "output": "{\"summary\":\"User requests guidance on downloading monthly invoice, no refund needed.\",\"category\":\"billing\",\"priority\":\"normal\",\"evidence\":[\"I do not need a refund.\",\"Please explain where to download my monthly invoice.\"]}",
+    "model": "deepseek-v4-flash",
+    "latencyMs": 883,
+    "usage": {
+      "inputTokens": 262,
+      "outputTokens": 46
+    }
+  },
+  {
+    "id": "active-security",
+    "output": "{\"summary\":\"Active security breach in workspace with unknown person downloading files.\",\"category\":\"technical\",\"priority\":\"urgent\",\"evidence\":[\"There is an active security breach in our workspace.\",\"An unknown person is downloading our files.\"]}",
+    "model": "deepseek-v4-flash",
+    "latencyMs": 928,
+    "usage": {
+      "inputTokens": 264,
+      "outputTokens": 47
+    }
+  },
+  {
+    "id": "resolved-outage",
+    "output": "{\"summary\":\"User asks for an explanation of a service outage that occurred yesterday but is now resolved.\",\"category\":\"technical\",\"priority\":\"normal\",\"evidence\":[\"The service was unavailable yesterday, but it works again.\",\"Can you explain what happened?\"]}",
+    "model": "deepseek-v4-flash",
+    "latencyMs": 1334,
+    "usage": {
+      "inputTokens": 263,
+      "outputTokens": 51
+    }
+  },
+  {
+    "id": "source-injection",
+    "output": "{\"summary\":\"User asks how to change password while logged in.\",\"category\":\"account\",\"priority\":\"normal\",\"evidence\":[\"My real question is how to change my password while I am logged in.\"]}",
+    "model": "deepseek-v4-flash",
+    "latencyMs": 964,
+    "usage": {
+      "inputTokens": 271,
+      "outputTokens": 41
+    }
+  },
+  {
+    "id": "unauthorized-charge",
+    "output": "{\"summary\":\"An unauthorized charge appeared on the user's card today.\",\"category\":\"billing\",\"priority\":\"urgent\",\"evidence\":[\"An unknown payment appeared on my card today.\",\"I did not authorize this charge.\"]}",
+    "model": "deepseek-v4-flash",
+    "latencyMs": 844,
+    "usage": {
+      "inputTokens": 262,
+      "outputTokens": 46
+    }
+  },
+  {
+    "id": "close-account",
+    "output": "{\"summary\":\"User requests account closure at month end, service works fine.\",\"category\":\"account\",\"priority\":\"normal\",\"evidence\":[\"Please close my account at the end of the month.\"]}",
+    "model": "deepseek-v4-flash",
+    "latencyMs": 1084,
+    "usage": {
+      "inputTokens": 267,
+      "outputTokens": 39
+    }
+  },
+  {
+    "id": "core-outage",
+    "output": "{\"summary\":\"The entire product is unusable, showing errors on every page for all users.\",\"category\":\"technical\",\"priority\":\"urgent\",\"evidence\":[\"The entire product is unusable right now.\",\"Every page shows an error for all users.\"]}",
+    "model": "deepseek-v4-flash",
+    "latencyMs": 1822,
+    "usage": {
+      "inputTokens": 264,
+      "outputTokens": 52
+    }
+  },
+  {
+    "id": "hr-refund",
+    "output": "{\"summary\":\"User reports being charged twice yesterday and requests a refund for the second payment.\",\"category\":\"billing\",\"priority\":\"normal\",\"evidence\":[\"Jučer mi je naplaćeno dvaput.\",\"Molim povrat druge uplate.\"]}",
+    "model": "deepseek-v4-flash",
+    "latencyMs": 1151,
+    "usage": {
+      "inputTokens": 268,
+      "outputTokens": 55
+    }
+  },
+  {
+    "id": "hr-password",
+    "output": "{\"summary\":\"User asks how to change their password; login works fine.\",\"category\":\"account\",\"priority\":\"normal\",\"evidence\":[\"Kako mogu promijeniti lozinku?\",\"Prijava mi radi bez problema.\"]}",
+    "model": "deepseek-v4-flash",
+    "latencyMs": 984,
+    "usage": {
+      "inputTokens": 265,
+      "outputTokens": 49
+    }
+  },
+  {
+    "id": "hr-team-lockout",
+    "output": "{\"summary\":\"Team members cannot log in today, blocking access to the workspace.\",\"category\":\"account\",\"priority\":\"urgent\",\"evidence\":[\"Nitko iz našeg tima se danas ne može prijaviti.\",\"Ne možemo pristupiti radnom prostoru.\"]}",
+    "model": "deepseek-v4-flash",
+    "latencyMs": 1184,
+    "usage": {
+      "inputTokens": 275,
+      "outputTokens": 60
+    }
+  },
+  {
+    "id": "hr-feature-request",
+    "output": "{\"summary\":\"User requests dark theme feature for the future; everything currently works normally.\",\"category\":\"other\",\"priority\":\"normal\",\"evidence\":[\"Možete li u budućnosti dodati tamnu temu?\",\"Trenutno sve radi normalno.\"]}",
+    "model": "deepseek-v4-flash",
+    "latencyMs": 962,
+    "usage": {
+      "inputTokens": 270,
+      "outputTokens": 56
+    }
+  }
+]

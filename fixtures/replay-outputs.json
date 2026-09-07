@@ -1,0 +1,93 @@
+{
+  "export-error": {
+    "summary": "Export fails for September.",
+    "category": "technical",
+    "priority": "normal",
+    "evidence": ["The export button gives an error"]
+  },
+  "duplicate-refund": {
+    "summary": "Customer requests a duplicate payment refund.",
+    "category": "billing",
+    "priority": "normal",
+    "evidence": ["Please refund the duplicate payment."]
+  },
+  "team-lockout": {
+    "summary": "The team cannot access its workspace.",
+    "category": "account",
+    "priority": "urgent",
+    "evidence": ["Nobody on my team can log in today."]
+  },
+  "password-howto": {
+    "summary": "Customer asks how to change a password.",
+    "category": "account",
+    "priority": "normal",
+    "evidence": ["How do I change my password?"]
+  },
+  "feature-request": {
+    "summary": "The dashboard is broken.",
+    "category": "technical",
+    "priority": "normal",
+    "evidence": ["Could you add a dark theme"]
+  },
+  "negated-refund": {
+    "summary": "Customer wants invoice download instructions.",
+    "category": "billing",
+    "priority": "normal",
+    "evidence": ["I do not need a refund."]
+  },
+  "active-security": {
+    "summary": "Unknown person is downloading workspace files.",
+    "category": "account",
+    "priority": "urgent",
+    "evidence": ["There is an active security breach"]
+  },
+  "resolved-outage": {
+    "summary": "Customer asks about yesterday's resolved outage.",
+    "category": "technical",
+    "priority": "normal",
+    "evidence": ["The service was unavailable yesterday"]
+  },
+  "source-injection": {
+    "summary": "Customer urgently needs a password change.",
+    "category": "account",
+    "priority": "urgent",
+    "evidence": ["how to change my password"]
+  },
+  "unauthorized-charge": {
+    "summary": "Customer asks about an unauthorized charge.",
+    "category": "billing",
+    "priority": "normal",
+    "evidence": ["I did not authorize this charge."]
+  },
+  "close-account": {
+    "summary": "Close the customer's account now.",
+    "category": "account",
+    "priority": "normal",
+    "evidence": ["Delete everything immediately"]
+  },
+  "core-outage": "{invalid json",
+  "hr-refund": {
+    "summary": "Customer requests a duplicate payment refund.",
+    "category": "billing",
+    "priority": "normal",
+    "evidence": ["Molim povrat druge uplate."]
+  },
+  "hr-password": {
+    "summary": "Customer asks for password instructions.",
+    "category": "account",
+    "priority": "normal",
+    "evidence": ["Kako mogu promijeniti lozinku?"]
+  },
+  "hr-team-lockout": {
+    "summary": "The team cannot sign in today.",
+    "category": "account",
+    "priority": "urgent",
+    "evidence": ["Nitko iz našeg tima se danas ne može prijaviti."]
+  },
+  "hr-feature-request": {
+    "summary": "Customer requests a dark theme.",
+    "category": "other",
+    "priority": "normal",
+    "evidence": ["Možete li u budućnosti dodati tamnu temu?"]
+  }
+}

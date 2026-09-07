@@ -1,0 +1,4 @@
+node_modules/
+local-data/
+docs/results/
+package-lock.json
