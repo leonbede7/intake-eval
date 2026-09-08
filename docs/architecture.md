@@ -8,6 +8,10 @@ Input: source text plus untrusted model output. Output: rejection reasons or a c
 
 In v0.2, `provider.ts` adds opt-in DeepSeek and loopback Ollama calls. `prompt.ts` defines a versioned contract without ground-truth labels. `benchmark.ts` compares live or replay candidates with a separately labeled dataset. `benchmark-cli.ts` controls input, paid-call opt-in, limits and local capture. `report.ts` generates a static, escaped HTML report with no client scripts or external assets.
 
+In v0.3, `triage-v2.ts` reuses the original core validation and replaces only its keyword-based routing decision with an explicit review reason and quote. The original validator and prompt remain available so historical results are reproducible. `web/` contains the playground, `build-web.ts` packages reviewed synthetic captures, and TypeScript compiles the same validators for the browser. No duplicate browser-only validation logic is maintained.
+
+`serve.ts` optionally supplies live generation on `127.0.0.1:4317`. Its route allowlist serves only public build assets. Strict Host, Origin and a random per-process token protect the paid endpoint from cross-origin requests and DNS rebinding. Input/body limits, one in-flight request and a 20-attempt lifetime cap bound work. Credentials remain in memory on the local server. Public GitHub Pages has no generation endpoint.
+
 ## Decisions
 
 1. Exact quotes make a narrow claim easy to test. Fuzzy matching could silently accept changed numbers or wording. The tradeoff is rejecting harmless formatting changes.
@@ -26,7 +30,7 @@ Model output and source text are data. There is no eval, tool execution, databas
 
 Reports omit source text, summaries, and evidence. Case IDs appear in reports and errors, so labels must not contain personal information. Exceptions from JSON parsing are replaced with a generic message to avoid echoing malformed input.
 
-No endpoint or durable review queue exists. A service version would need authentication, permissions, bounded streaming reads, output escaping in its UI, retention policy, idempotent approval writes, and audit history before connecting real customer workflows.
+A loopback-only demonstration endpoint now exists, with no durable review queue or public paid endpoint. A production service would still need user authentication, durable cross-instance quotas, permissions, retention policy, idempotent approval writes and audit history before connecting real customer workflows. The process-local limit is not a production billing system.
 
 ## A focused next version
 

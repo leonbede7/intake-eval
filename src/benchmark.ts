@@ -3,7 +3,9 @@ import { categories, priorities, reviewCandidate } from './triage.ts';
 import type { Category, Priority } from './triage.ts';
 import { ProviderError } from './provider.ts';
 import type { Provider } from './provider.ts';
-import { PROMPT_HASH, PROMPT_VERSION } from './prompt.ts';
+import { promptMetadata } from './prompt.ts';
+import type { Policy } from './prompt.ts';
+import { reviewCandidateV2 } from './triage-v2.ts';
 
 export interface LabeledCase {
   id: string;
@@ -105,7 +107,7 @@ export function summarize(rows: BenchmarkRow[]) {
   };
 }
 
-export async function benchmark(cases: LabeledCase[], provider: Provider) {
+export async function benchmark(cases: LabeledCase[], provider: Provider, policy: Policy = 'v1') {
   const rows: BenchmarkRow[] = [];
   for (const entry of cases) {
     let row: BenchmarkRow = {
@@ -122,7 +124,10 @@ export async function benchmark(cases: LabeledCase[], provider: Provider) {
     try {
       // Ground-truth labels and rationales are deliberately excluded from generation.
       const generated = await provider.generate(entry.source, entry.id);
-      const review = reviewCandidate(entry.source, generated.output);
+      const review =
+        policy === 'v1'
+          ? reviewCandidate(entry.source, generated.output)
+          : reviewCandidateV2(entry.source, generated.output);
       row = {
         ...row,
         outcome: review.decision,
@@ -148,11 +153,12 @@ export async function benchmark(cases: LabeledCase[], provider: Provider) {
   }
   return {
     schemaVersion: 1,
+    policy,
     mode: provider.name === 'replay' ? 'synthetic-replay' : 'live-model',
     createdAt: new Date().toISOString(),
     provider: provider.name,
     requestedModel: provider.model,
-    prompt: { version: PROMPT_VERSION, sha256: PROMPT_HASH },
+    prompt: promptMetadata(policy),
     dataset: {
       sha256: createHash('sha256').update(JSON.stringify(cases)).digest('hex'),
       selected: cases.length,

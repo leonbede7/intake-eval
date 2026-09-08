@@ -12,7 +12,9 @@ The labeled dataset and replay outputs were authored with AI assistance. No inde
 
 Category is one of billing, technical, account, other. Priority is normal or urgent, following the policy in `src/prompt.ts`. Expected escalation is a separate operational label: a routine refund may need an escalation queue while retaining normal incident priority.
 
-This distinction intentionally exposes the existing routing rule. It scans English source keywords and urgent priority. The rule can over-escalate a negated refund and miss a Croatian refund. These are pipeline failures, not automatically model classification failures.
+This distinction intentionally exposes V1's routing rule. It scans English source keywords and urgent priority. The rule can over-escalate a negated refund and miss a Croatian refund. These are pipeline failures, not automatically model classification failures.
+
+V2 uses urgent priority or a model-selected specialist reason with an exact supporting quote. The [20-case routing comparison](routing-experiment.md) tests this change on a separate targeted development set frozen before implementation. Both the labels and implementation were AI-assisted; freezing the cases does not make this an independent or blind test. Since V2 also changes prompt guidance, this is a comparison of complete policies, not an isolated routing-rule ablation.
 
 Each case includes a rationale. Ambiguous cases should be adjudicated by a person and versioned; do not silently edit labels to improve a run's score.
 
@@ -42,4 +44,4 @@ HTTP bodies and low-level exceptions are never echoed in reports. Automatic retr
 
 ## Next experiment
 
-Have a reviewer independently label a held-out set and inspect summary support. Consider separating an explicit request-for-financial-action label from urgent incident priority rather than expanding multilingual keyword lists indefinitely. Freeze the baseline, implement the proposed routing change, compare on the held-out set, and report regressions as well as improvements.
+Have a reviewer independently label a held-out set and inspect summary support and specialist reasons. Freeze both policies before running on those unseen examples, and report regressions as well as improvements. The targeted comparison already published is development evidence, not a substitute for this step.

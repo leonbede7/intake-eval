@@ -2,3 +2,6 @@ node_modules/
 local-data/
 docs/results/
 package-lock.json
+site/
+test-results/
+playwright-report/

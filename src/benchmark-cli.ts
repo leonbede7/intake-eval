@@ -4,6 +4,7 @@ import { benchmark, parseDataset } from './benchmark.ts';
 import { createProvider } from './provider.ts';
 import type { Provider, Generation } from './provider.ts';
 import { messagesFor } from './prompt.ts';
+import type { Policy } from './prompt.ts';
 import { renderReport } from './report.ts';
 
 async function readJson(file: string | URL): Promise<unknown> {
@@ -19,7 +20,7 @@ async function main() {
   const args = process.argv.slice(2);
   if (args.length === 1 && args[0] === '--help') {
     console.log(`Usage: npm run benchmark -- [--provider replay|deepseek|ollama] [--model name]
-  [--input dataset.json] [--limit 1..50] [--out new-directory] [--capture] [--allow-paid]
+  [--policy v1|v2] [--input dataset.json] [--limit 1..50] [--out new-directory] [--capture] [--allow-paid]
 Default: offline synthetic replay. DeepSeek requires --allow-paid and DEEPSEEK_API_KEY.
 Ollama uses only localhost:11434 and an explicitly named, already-installed model.
 --capture saves generated outputs locally for human review; reports omit them.
@@ -33,7 +34,7 @@ Exit 0: run saved (label mismatches are measurements); 1: provider error; 2: set
     if (flags.has(key)) throw new Error('Duplicate argument.');
     if (['--capture', '--allow-paid'].includes(key)) flags.set(key, true);
     else if (
-      ['--provider', '--model', '--input', '--limit', '--out'].includes(key) &&
+      ['--provider', '--model', '--input', '--limit', '--out', '--policy'].includes(key) &&
       args[index + 1] &&
       !args[index + 1]!.startsWith('--')
     )
@@ -41,6 +42,9 @@ Exit 0: run saved (label mismatches are measurements); 1: provider error; 2: set
     else throw new Error('Invalid arguments. Run with --help.');
   }
   const name = flags.get('--provider') ?? 'replay';
+  const policy = (flags.get('--policy') ?? 'v1') as Policy;
+  if (!['v1', 'v2'].includes(policy)) throw new Error('Unknown policy.');
+  if (name === 'replay' && policy !== 'v1') throw new Error('Authored replay supports only v1.');
   if (!['replay', 'deepseek', 'ollama'].includes(name as string))
     throw new Error('Unknown provider.');
   if (name !== 'deepseek' && flags.has('--allow-paid'))
@@ -94,6 +98,7 @@ Exit 0: run saved (label mismatches are measurements); 1: provider error; 2: set
     provider = createProvider({
       name: name as 'deepseek' | 'ollama',
       model: model ?? 'deepseek-v4-flash',
+      policy,
       ...(process.env.DEEPSEEK_API_KEY && name === 'deepseek'
         ? { apiKey: process.env.DEEPSEEK_API_KEY }
         : {}),
@@ -104,7 +109,8 @@ Exit 0: run saved (label mismatches are measurements); 1: provider error; 2: set
   const reservationUsd = cases.reduce(
     (sum, entry) =>
       sum +
-      ((Buffer.byteLength(JSON.stringify(messagesFor(entry.source)), 'utf8') + 1024) * 0.44 +
+      ((Buffer.byteLength(JSON.stringify(messagesFor(entry.source, policy)), 'utf8') + 1024) *
+        0.44 +
         512 * 1.32) /
         1_000_000,
     0,
@@ -136,7 +142,7 @@ Exit 0: run saved (label mismatches are measurements); 1: provider error; 2: set
     console.log(
       `Conservative planning reserve: $${reservationUsd.toFixed(4)} at documented 2026-09-07 peak rates. No retries.`,
     );
-  const report = await benchmark(cases, provider);
+  const report = await benchmark(cases, provider, policy);
   await writeFile(join(out, 'report.json'), `${JSON.stringify(report, null, 2)}\n`, { flag: 'wx' });
   await writeFile(join(out, 'report.html'), renderReport(report), { flag: 'wx' });
   if (flags.has('--capture'))

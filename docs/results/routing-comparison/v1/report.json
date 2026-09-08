@@ -1,0 +1,498 @@
+{
+  "schemaVersion": 1,
+  "policy": "v1",
+  "mode": "live-model",
+  "createdAt": "2026-09-07T17:54:10.255Z",
+  "provider": "deepseek",
+  "requestedModel": "deepseek-v4-flash",
+  "prompt": {
+    "version": "triage-v1",
+    "sha256": "cab035aee17bba5b05989c232e9b93d4d4423327ada7f689404f350fcef01281"
+  },
+  "dataset": {
+    "sha256": "2adffebc11e39ff5c6863b10a9e31d025d93112805f2d4f8020e352e104fa676",
+    "selected": 20,
+    "attempted": 20,
+    "skipped": 0,
+    "labels": "AI-authored provisional labels; not independently human-validated"
+  },
+  "settings": {
+    "temperature": 0,
+    "maxOutputTokens": 512,
+    "retries": 0
+  },
+  "metrics": {
+    "total": 20,
+    "providerErrors": 0,
+    "rejected": 0,
+    "scorable": 20,
+    "category": {
+      "correct": 20,
+      "denominator": 20
+    },
+    "priority": {
+      "correct": 20,
+      "denominator": 20
+    },
+    "escalation": {
+      "expected": 8,
+      "missed": 1,
+      "unscorable": 0,
+      "falsePositives": 4,
+      "standardScorable": 12
+    },
+    "latencyMs": {
+      "measured": 20,
+      "p50": 1085,
+      "p95": 1320
+    },
+    "tokens": {
+      "measured": 20,
+      "input": 5351,
+      "output": 965
+    },
+    "summaryCorrectness": "not_scored_requires_human_review"
+  },
+  "rows": [
+    {
+      "id": "invoice-only",
+      "language": "en",
+      "expected": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": true
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1290,
+      "usage": {
+        "inputTokens": 263,
+        "outputTokens": 52
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "refund-extra-seat",
+      "language": "en",
+      "expected": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": true
+      },
+      "predicted": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": true
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1059,
+      "usage": {
+        "inputTokens": 260,
+        "outputTokens": 33
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "payment-already-fixed",
+      "language": "en",
+      "expected": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": false
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 917,
+      "usage": {
+        "inputTokens": 263,
+        "outputTokens": 51
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "unknown-signin",
+      "language": "en",
+      "expected": {
+        "category": "account",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "predicted": {
+        "category": "account",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1215,
+      "usage": {
+        "inputTokens": 263,
+        "outputTokens": 47
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "security-document",
+      "language": "en",
+      "expected": {
+        "category": "other",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "other",
+        "priority": "normal",
+        "escalation": true
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1172,
+      "usage": {
+        "inputTokens": 259,
+        "outputTokens": 39
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "legal-escalation",
+      "language": "en",
+      "expected": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": true
+      },
+      "predicted": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": true
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1196,
+      "usage": {
+        "inputTokens": 267,
+        "outputTokens": 52
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "legal-location",
+      "language": "en",
+      "expected": {
+        "category": "other",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "other",
+        "priority": "normal",
+        "escalation": true
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1133,
+      "usage": {
+        "inputTokens": 263,
+        "outputTokens": 46
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "cancel-future",
+      "language": "en",
+      "expected": {
+        "category": "account",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "account",
+        "priority": "normal",
+        "escalation": true
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 952,
+      "usage": {
+        "inputTokens": 264,
+        "outputTokens": 48
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "injection-financial",
+      "language": "en",
+      "expected": {
+        "category": "billing",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "predicted": {
+        "category": "billing",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 701,
+      "usage": {
+        "inputTokens": 271,
+        "outputTokens": 36
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "resolved-login",
+      "language": "en",
+      "expected": {
+        "category": "account",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "account",
+        "priority": "normal",
+        "escalation": false
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 887,
+      "usage": {
+        "inputTokens": 267,
+        "outputTokens": 41
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "export-file",
+      "language": "en",
+      "expected": {
+        "category": "technical",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "technical",
+        "priority": "normal",
+        "escalation": false
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1356,
+      "usage": {
+        "inputTokens": 263,
+        "outputTokens": 36
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "offline-product",
+      "language": "en",
+      "expected": {
+        "category": "technical",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "predicted": {
+        "category": "technical",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 778,
+      "usage": {
+        "inputTokens": 259,
+        "outputTokens": 40
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "hr-return-payment",
+      "language": "hr",
+      "expected": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": true
+      },
+      "predicted": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": false
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1210,
+      "usage": {
+        "inputTokens": 270,
+        "outputTokens": 48
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "hr-no-refund",
+      "language": "hr",
+      "expected": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": false
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1320,
+      "usage": {
+        "inputTokens": 270,
+        "outputTokens": 54
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "hr-return-complete",
+      "language": "hr",
+      "expected": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "billing",
+        "priority": "normal",
+        "escalation": false
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 858,
+      "usage": {
+        "inputTokens": 277,
+        "outputTokens": 60
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "hr-intruder",
+      "language": "hr",
+      "expected": {
+        "category": "account",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "predicted": {
+        "category": "account",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1122,
+      "usage": {
+        "inputTokens": 271,
+        "outputTokens": 53
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "hr-security-guide",
+      "language": "hr",
+      "expected": {
+        "category": "other",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "other",
+        "priority": "normal",
+        "escalation": false
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1085,
+      "usage": {
+        "inputTokens": 273,
+        "outputTokens": 58
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "hr-unrecognized-charge",
+      "language": "hr",
+      "expected": {
+        "category": "billing",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "predicted": {
+        "category": "billing",
+        "priority": "urgent",
+        "escalation": true
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 904,
+      "usage": {
+        "inputTokens": 278,
+        "outputTokens": 57
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "hr-close-later",
+      "language": "hr",
+      "expected": {
+        "category": "account",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "account",
+        "priority": "normal",
+        "escalation": false
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 951,
+      "usage": {
+        "inputTokens": 273,
+        "outputTokens": 55
+      },
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "id": "hr-feature-export",
+      "language": "hr",
+      "expected": {
+        "category": "other",
+        "priority": "normal",
+        "escalation": false
+      },
+      "predicted": {
+        "category": "other",
+        "priority": "normal",
+        "escalation": false
+      },
+      "outcome": "review_required",
+      "issues": [],
+      "latencyMs": 1132,
+      "usage": {
+        "inputTokens": 277,
+        "outputTokens": 59
+      },
+      "model": "deepseek-v4-flash"
+    }
+  ]
+}

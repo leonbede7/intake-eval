@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Try Leon Bede's AI triage evaluation project. Inspect real model responses, validate evidence, and compare two routing policies."
+    />
+    <meta name="color-scheme" content="light" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'"
+    />
+    <title>Intake Eval : AI triage playground · Leon Bede</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#playground">Skip to playground</a>
+    <header class="topbar">
+      <a class="brand" href="#">Intake<span>Eval</span><small>by Leon Bede</small></a>
+      <nav aria-label="Main navigation">
+        <a href="#playground">Playground</a><a href="#experiment">Experiment</a
+        ><a href="#about">About</a>
+      </nav>
+      <a class="source-link" href="https://github.com/leonbede7/intake-eval">View source ↗</a>
+    </header>
+    <main>
+      <section id="playground" aria-labelledby="title">
+        <div class="intro">
+          <div>
+            <p class="eyebrow">Support triage</p>
+            <h1>Review an AI response.</h1>
+            <p class="lede">
+              Choose a support request, inspect the model response, and test the validation rules.
+            </p>
+          </div>
+          <aside class="mode">
+            <span class="status-dot"></span><strong id="mode-name">Recorded model responses</strong>
+            <p id="mode-detail">
+              The public demo uses saved synthetic examples. Validation happens in your browser; it
+              makes no paid API calls.
+            </p>
+          </aside>
+        </div>
+        <div class="workflow" aria-label="Workflow">
+          <span>01 Customer request</span><span aria-hidden="true">→</span
+          ><span>02 AI candidate</span><span aria-hidden="true">→</span><span>03 Validation</span
+          ><span aria-hidden="true">→</span><span>Human review</span>
+        </div>
+        <p id="load-error" class="error" role="alert" hidden></p>
+        <div class="workspace">
+          <aside class="examples">
+            <p class="eyebrow">Start with a case</p>
+            <label for="example">Recorded example</label
+            ><select id="example" disabled>
+              <option>Loading examples…</option>
+            </select>
+            <div id="quick-examples" class="quick-examples"></div>
+            <div class="policy">
+              <label for="policy">Routing policy</label
+              ><select id="policy">
+                <option value="v2">V2 · explicit reason</option>
+                <option value="v1">V1 · keywords</option>
+              </select>
+              <p id="policy-description">
+                Separates urgency from the need for specialist review, with a supporting quote.
+              </p>
+            </div>
+            <a href="#experiment" class="text-link">Compare the measured results ↓</a>
+          </aside>
+          <div class="editor">
+            <div class="panel-heading">
+              <span class="step">01</span>
+              <h2>Customer request</h2>
+              <span id="language" class="tag">EN / HR</span>
+            </div>
+            <label class="sr-only" for="request">Customer request text</label
+            ><textarea
+              id="request"
+              maxlength="2000"
+              spellcheck="false"
+              placeholder="Choose a case or write a synthetic support request."
+            ></textarea>
+            <div class="input-footer">
+              <span id="character-count">0 / 2,000 characters</span
+              ><button id="reset" class="quiet" type="button" disabled>Reset example</button>
+            </div>
+            <div class="panel-heading candidate-heading">
+              <span class="step">02</span>
+              <h2>AI candidate</h2>
+              <span id="candidate-origin" class="tag">Recorded</span>
+            </div>
+            <p class="helper">
+              You can edit this JSON. Try changing a quote to a sentence that never appeared in the
+              request.
+            </p>
+            <label class="sr-only" for="candidate">AI candidate JSON</label
+            ><textarea
+              id="candidate"
+              class="code"
+              maxlength="20000"
+              spellcheck="false"
+              placeholder="The model's structured response appears here."
+            ></textarea>
+            <div class="actions">
+              <button id="validate" class="primary" type="button" disabled>
+                Validate candidate <span aria-hidden="true">→</span></button
+              ><button id="generate" class="secondary" type="button" hidden>
+                Generate with DeepSeek
+              </button>
+            </div>
+            <p id="action-status" class="helper" aria-live="polite"></p>
+          </div>
+          <section class="result" aria-labelledby="result-heading">
+            <div class="panel-heading">
+              <span class="step">03</span>
+              <h2 id="result-heading">Review decision</h2>
+            </div>
+            <div id="result-content" aria-live="polite">
+              <p class="empty">Select an example to inspect the result.</p>
+            </div>
+            <div class="boundary">
+              <strong>What still needs review</strong>
+              <p>
+                A real quote can still support the wrong conclusion. These checks never approve a
+                refund, send a reply, or prove that a summary is true.
+              </p>
+            </div>
+          </section>
+        </div>
+      </section>
+      <section id="experiment" class="experiment" aria-labelledby="experiment-title">
+        <p class="eyebrow">The measured experiment</p>
+        <div class="section-intro">
+          <h2 id="experiment-title">Compare routing policies.</h2>
+          <p>
+            20 new synthetic requests, saved before the implementation changed. Both policies were
+            run on the same inputs. The examples and labels were AI-authored; this is a targeted
+            development comparison, not an independent accuracy benchmark.
+          </p>
+        </div>
+        <div id="comparison" class="comparison"><p>Loading published results…</p></div>
+        <div class="findings">
+          <div>
+            <span class="step">A</span>
+            <h3>Words are not intent</h3>
+            <p>
+              “I do not need a refund” contains a trigger word. V1 routes by English keywords. V2
+              asks for an explicit reason and a supporting quote.
+            </p>
+          </div>
+          <div>
+            <span class="step">B</span>
+            <h3>Urgency is a different question</h3>
+            <p>
+              A routine refund can be normal priority and still require financial review. The
+              updated contract keeps those decisions separate.
+            </p>
+          </div>
+          <div>
+            <span class="step">C</span>
+            <h3>Keep the failures visible</h3>
+            <p>
+              Model output, provisional labels, prompt hashes and rejected responses stay available
+              for inspection. A higher match count is not proof of safety.
+            </p>
+          </div>
+        </div>
+        <p>
+          <a
+            class="text-link"
+            href="https://github.com/leonbede7/intake-eval/blob/main/docs/routing-experiment.md"
+            >Read the protocol, results and limitations ↗</a
+          >
+        </p>
+      </section>
+      <section id="about" class="about" aria-labelledby="about-title">
+        <div>
+          <p class="eyebrow">A portfolio project by Leon Bede</p>
+          <h2 id="about-title">About this project.</h2>
+        </div>
+        <div>
+          <p>
+            I work on AI-assisted products and automation, informed by hands-on dealership
+            operations. This project explores one practical question: what has to happen between an
+            AI response and a business action?
+          </p>
+          <p>
+            The implementation, examples and documentation were built with AI assistance. My
+            portfolio describes the scope and evidence openly. This is a prototype with synthetic
+            data, not a production support system.
+          </p>
+          <div class="about-links">
+            <a href="https://github.com/leonbede7">GitHub portfolio ↗</a
+            ><a href="https://www.linkedin.com/in/leon-bede">LinkedIn ↗</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <span>Intake Eval · TypeScript · DeepSeek · Human review</span
+      ><span>Public demo: no API key, no outgoing messages.</span>
+    </footer>
+  </body>
+</html>

@@ -84,7 +84,7 @@ test('report omits raw source and model summaries; model metadata is HTML-escape
   assert.ok(html.includes('&lt;script&gt;'));
   assert.equal(html.includes(dataset[0]!.source), false);
   assert.equal(html.includes('The dashboard is broken.'), false);
-  assert.match(html, /SYNTHETIC REPLAY — not model results/);
+  assert.match(html, /SYNTHETIC REPLAY : not model results/);
   assert.match(html, /Content-Security-Policy/);
 });
 test('empty measurement denominators and percentiles are not misleading zeros', () => {

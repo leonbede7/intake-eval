@@ -1,4 +1,5 @@
 import { messagesFor } from './prompt.ts';
+import type { Policy } from './prompt.ts';
 
 export interface Generation {
   output: string;
@@ -33,6 +34,7 @@ export function createProvider(config: {
   apiKey?: string;
   timeoutMs?: number;
   fetchImpl?: typeof fetch;
+  policy?: Policy;
 }): Provider {
   if (!/^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,99}$/.test(config.model))
     throw new Error('Invalid model name.');
@@ -58,7 +60,7 @@ export function createProvider(config: {
       const body = isCloud
         ? {
             model: config.model,
-            messages: messagesFor(source),
+            messages: messagesFor(source, config.policy),
             stream: false,
             temperature: 0,
             max_tokens: 512,
@@ -67,7 +69,7 @@ export function createProvider(config: {
           }
         : {
             model: config.model,
-            messages: messagesFor(source),
+            messages: messagesFor(source, config.policy),
             stream: false,
             format: 'json',
             options: { temperature: 0, num_predict: 512 },
