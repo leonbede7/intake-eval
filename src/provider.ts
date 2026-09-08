@@ -107,7 +107,10 @@ export function createProvider(config: {
         }
         let data: unknown;
         try {
-          data = JSON.parse(Buffer.concat(chunks).toString('utf8'));
+          // Never repair corrupt transport bytes into different model-authored text.
+          data = JSON.parse(
+            new TextDecoder('utf-8', { fatal: true }).decode(Buffer.concat(chunks)),
+          );
         } catch {
           throw new ProviderError('INVALID_RESPONSE');
         }

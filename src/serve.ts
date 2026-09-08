@@ -13,6 +13,7 @@ const assets = new Map([
   ['/index.html', ['index.html', 'text/html; charset=utf-8']],
   ['/styles.css', ['styles.css', 'text/css; charset=utf-8']],
   ['/app.js', ['app.js', 'text/javascript; charset=utf-8']],
+  ['/reliability.html', ['reliability.html', 'text/html; charset=utf-8']],
   ['/lib/triage.js', ['lib/triage.js', 'text/javascript; charset=utf-8']],
   ['/lib/triage-v2.js', ['lib/triage-v2.js', 'text/javascript; charset=utf-8']],
   ['/data/demo.json', ['data/demo.json', 'application/json; charset=utf-8']],

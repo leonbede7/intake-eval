@@ -1,0 +1,173 @@
+{
+  "kind": "offline_fault_injection",
+  "policy": "v2",
+  "codeHash": "68866aff9267cab0e7bc2bd228b95f5bf67c08b37665263fb157cf8573edb1bc",
+  "methodology": "AI-authored synthetic faults served by a local HTTP server. Real fetch, provider parsing and V2 validation are executed. No model is called and no API key is read. These results measure specified failure behavior, not model accuracy or production reliability.",
+  "source": "The export button gives an error. Please help me download the report.",
+  "knownLimitCandidate": {
+    "summary": "The customer successfully exported the report and needs no help.",
+    "category": "technical",
+    "priority": "normal",
+    "evidence": [
+      "The export button gives an error"
+    ],
+    "reviewReason": "none",
+    "reviewEvidence": null
+  },
+  "checks": 14,
+  "matched": 13,
+  "knownLimits": 1,
+  "regressions": 1,
+  "rows": [
+    {
+      "id": "valid-response",
+      "title": "A complete response",
+      "layer": "transport",
+      "description": "A valid provider envelope reaches the same V2 validator used by the playground.",
+      "expected": "review_required:standard",
+      "observed": "review_required:standard",
+      "attempts": 1,
+      "matched": true
+    },
+    {
+      "id": "unicode-response",
+      "title": "Valid Unicode survives decoding",
+      "layer": "transport",
+      "description": "An accented summary remains valid UTF-8. This checks decoding, not translation quality.",
+      "expected": "review_required:standard",
+      "observed": "review_required:standard",
+      "attempts": 1,
+      "matched": true
+    },
+    {
+      "id": "rate-limit",
+      "title": "Provider returns HTTP 429",
+      "layer": "transport",
+      "description": "The server sends a rate limit and Retry-After header. The adapter makes one attempt and returns a sanitized error.",
+      "expected": "provider_error:HTTP_ERROR",
+      "observed": "provider_error:HTTP_ERROR",
+      "attempts": 1,
+      "matched": true
+    },
+    {
+      "id": "unavailable",
+      "title": "Provider returns HTTP 503",
+      "layer": "transport",
+      "description": "An unavailable service is not counted as a validated model response. Its response body is not exposed.",
+      "expected": "provider_error:HTTP_ERROR",
+      "observed": "provider_error:HTTP_ERROR",
+      "attempts": 1,
+      "matched": true
+    },
+    {
+      "id": "disconnect",
+      "title": "Connection closes before a response",
+      "layer": "transport",
+      "description": "The local server closes the socket. A network error is returned without automatically repeating the call.",
+      "expected": "provider_error:NETWORK_ERROR",
+      "observed": "provider_error:NETWORK_ERROR",
+      "attempts": 1,
+      "matched": true
+    },
+    {
+      "id": "truncated",
+      "title": "Model reaches its output limit",
+      "layer": "transport",
+      "description": "Even parseable candidate JSON is not used when the provider reports an incomplete finish.",
+      "expected": "provider_error:INCOMPLETE_OUTPUT",
+      "observed": "provider_error:INCOMPLETE_OUTPUT",
+      "attempts": 1,
+      "matched": true
+    },
+    {
+      "id": "malformed-envelope",
+      "title": "Response is not JSON",
+      "layer": "transport",
+      "description": "An HTML-shaped error page cannot become a candidate, even with HTTP 200.",
+      "expected": "provider_error:INVALID_RESPONSE",
+      "observed": "provider_error:INVALID_RESPONSE",
+      "attempts": 1,
+      "matched": true
+    },
+    {
+      "id": "invalid-utf8",
+      "title": "A response contains a corrupt UTF-8 byte",
+      "layer": "transport",
+      "description": "A bad byte inside a JSON string must be rejected, rather than silently replaced with a different character.",
+      "expected": "provider_error:INVALID_RESPONSE",
+      "observed": "review_required:standard",
+      "attempts": 1,
+      "matched": false
+    },
+    {
+      "id": "oversized-stream",
+      "title": "Chunked response exceeds the byte limit",
+      "layer": "transport",
+      "description": "More than 128,000 response bytes arrive without Content-Length. The adapter stops reading and rejects the response.",
+      "expected": "provider_error:INVALID_RESPONSE",
+      "observed": "provider_error:INVALID_RESPONSE",
+      "attempts": 1,
+      "matched": true
+    },
+    {
+      "id": "headers-timeout",
+      "title": "Server never sends response headers",
+      "layer": "transport",
+      "description": "The real fetch request is aborted at the configured 250 ms test deadline. No retry is made.",
+      "expected": "provider_error:TIMEOUT",
+      "observed": "provider_error:TIMEOUT",
+      "attempts": 1,
+      "matched": true
+    },
+    {
+      "id": "body-timeout",
+      "title": "Headers arrive, then the body stalls",
+      "layer": "transport",
+      "description": "The deadline also covers reading the response stream after headers have arrived.",
+      "expected": "provider_error:TIMEOUT",
+      "observed": "provider_error:TIMEOUT",
+      "attempts": 1,
+      "matched": true
+    },
+    {
+      "id": "invalid-candidate",
+      "title": "Envelope is valid, candidate JSON is broken",
+      "layer": "validation",
+      "description": "Transport success does not bypass candidate validation.",
+      "expected": "rejected:INVALID_JSON",
+      "observed": "rejected:INVALID_JSON",
+      "attempts": 1,
+      "matched": true
+    },
+    {
+      "id": "invented-evidence",
+      "title": "Evidence is absent from the request",
+      "layer": "validation",
+      "description": "A plausible candidate with an invented quote is rejected by exact source matching.",
+      "expected": "rejected:UNGROUNDED_EVIDENCE",
+      "observed": "rejected:UNGROUNDED_EVIDENCE",
+      "attempts": 1,
+      "matched": true
+    },
+    {
+      "id": "unexpected-action",
+      "title": "Candidate adds an execute field",
+      "layer": "validation",
+      "description": "Unexpected fields are rejected. The harness has no action execution step.",
+      "expected": "rejected:INVALID_SCHEMA",
+      "observed": "rejected:INVALID_SCHEMA",
+      "attempts": 1,
+      "matched": true
+    },
+    {
+      "id": "false-summary",
+      "title": "A false summary with a real quote",
+      "layer": "known_limit",
+      "description": "The candidate says the export succeeded, contradicting the request. Exact quote matching still routes it to a human. This is a reproduced limitation, not a claim of semantic correctness.",
+      "expected": "review_required:standard",
+      "observed": "review_required:standard",
+      "attempts": 1,
+      "matched": true
+    }
+  ]
+}

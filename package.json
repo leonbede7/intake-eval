@@ -11,6 +11,7 @@
     "demo": "node src/cli.ts",
     "evaluate": "node src/cli.ts --json",
     "benchmark": "node src/benchmark-cli.ts",
+    "reliability": "node src/reliability-cli.ts",
     "build:web": "tsc -p tsconfig.web.json && node src/build-web.ts",
     "playground": "node src/serve.ts",
     "test:e2e": "playwright test",

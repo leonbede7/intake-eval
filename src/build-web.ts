@@ -33,6 +33,10 @@ await writeFile(
   `${JSON.stringify({ samples, comparison }, null, 2)}\n`,
 );
 await writeFile(join(root, 'site/.nojekyll'), '');
+await copyFile(
+  join(root, 'docs/results/reliability/report.html'),
+  join(root, 'site/reliability.html'),
+);
 console.log(
   'Static playground built in site/ from public synthetic captures. No credentials or provider code included.',
 );

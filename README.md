@@ -4,6 +4,8 @@
 
 **[Open the playground](https://leonbede7.github.io/intake-eval/)** · [Read the policy comparison](docs/routing-experiment.md)
 
+**[Explore the failure lab](https://leonbede7.github.io/intake-eval/reliability.html):** reproducible local HTTP faults test deadlines, connection failures, invalid bytes and validation. The suite found and fixed a UTF-8 decoding issue. It also demonstrates why exact quotes cannot establish summary truthfulness. [Method and before/after evidence](docs/reliability.md).
+
 An AI model returns a plausible summary, category, and priority. Before an operator relies on it, what can software actually verify? Intake Eval checks the shape of that output, confirms that evidence quotes occur in the source, and routes valid candidates to human review. A fixture suite makes regressions visible.
 
 This is a portfolio prototype built with AI assistance. The default demos run offline without an API key. An opt-in benchmark can call DeepSeek or a local Ollama model and save a readable HTML report. It is not a deployed customer support system.
@@ -140,6 +142,8 @@ There is no automatic approval or action execution. A quote appearing in a sourc
 | Valid output                                                  | Require a person to verify it                    |
 
 ## Run the checks
+
+For the offline failure lab, run `npm run reliability`. It uses a local HTTP server and the real provider parser with synthetic responses, without model calls or credentials. The report separates 14 contract checks from one known semantic limitation. The published snapshot is also checked by `npm test`.
 
 ```bash
 npm ci
