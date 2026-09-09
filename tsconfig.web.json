@@ -12,5 +12,5 @@
     "types": [],
     "lib": ["ES2023", "DOM"]
   },
-  "include": ["src/triage.ts", "src/triage-v2.ts"]
+  "include": ["src/triage.ts", "src/triage-v2.ts", "src/human-review.ts"]
 }

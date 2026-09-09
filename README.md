@@ -4,6 +4,8 @@
 
 **[Open the playground](https://leonbede7.github.io/intake-eval/)** · [Read the policy comparison](docs/routing-experiment.md)
 
+**[Try human review](https://leonbede7.github.io/intake-eval/review.html):** assess a synthetic request before revealing its recorded V2 response. Check the summary, save your decision, and compare it with the provisional labels. Initial assessments and later revisions stay separate. Progress stays in your browser, with validated JSON import and export. No human results are prefilled. [Review guide and data format](docs/human-review.md).
+
 **[Explore the failure lab](https://leonbede7.github.io/intake-eval/reliability.html):** reproducible local HTTP faults test deadlines, connection failures, invalid bytes and validation. The suite found and fixed a UTF-8 decoding issue. It also demonstrates why exact quotes cannot establish summary truthfulness. [Method and before/after evidence](docs/reliability.md).
 
 An AI model returns a plausible summary, category, and priority. Before an operator relies on it, what can software actually verify? Intake Eval checks the shape of that output, confirms that evidence quotes occur in the source, and routes valid candidates to human review. A fixture suite makes regressions visible.

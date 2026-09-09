@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Review recorded AI support responses. Assess the request first, check the summary, and keep an exportable record of your decisions."
+    />
+    <meta name="color-scheme" content="light" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'"
+    />
+    <title>Human review · Intake Eval</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="review.css" />
+    <script type="module" src="review.js"></script>
+  </head>
+  <body class="review-page">
+    <a class="skip" href="#review-main">Skip to human review</a>
+    <header class="topbar">
+      <a class="brand" href="./">Intake<span>Eval</span><small>by Leon Bede</small></a>
+      <nav aria-label="Main navigation">
+        <a href="./#playground">Playground</a><a href="reliability.html">Failure lab</a
+        ><a href="review.html" aria-current="page">Human review</a>
+      </nav>
+      <a class="source-link" href="https://github.com/leonbede7/intake-eval">View source ↗</a>
+    </header>
+    <main id="review-main">
+      <div class="review-intro">
+        <div>
+          <p class="eyebrow">The decision after validation</p>
+          <h1>Would you use<br />this response?</h1>
+          <p class="lede">
+            Read the request. Make your own assessment. Then check what the model got right and what
+            needs work.
+          </p>
+        </div>
+        <aside class="review-context">
+          <strong>20 synthetic requests · EN / HR</strong>
+          <p>
+            Saved V2 responses. No model calls. Your reviews stay in this browser unless you
+            download them.
+          </p>
+          <a href="#review-method">How this review works ↓</a>
+        </aside>
+      </div>
+      <noscript
+        ><p class="error">
+          This review tool needs JavaScript for local validation and saving. You can still read the
+          method below or explore the <a href="reliability.html">Failure lab</a>.
+        </p></noscript
+      >
+      <p id="review-error" class="error" role="alert" hidden></p>
+      <p id="review-message" class="review-message" role="status" aria-live="polite"></p>
+      <div id="review-app" hidden>
+        <section class="session-bar" aria-label="Review session">
+          <div>
+            <label for="reviewer-label"
+              >Reviewer label <span class="optional">(optional)</span></label
+            ><input
+              id="reviewer-label"
+              maxlength="80"
+              placeholder="Name or alias"
+              autocomplete="off"
+            />
+          </div>
+          <div>
+            <label for="reviewer-role">Relationship to this project</label
+            ><select id="reviewer-role">
+              <option value="visitor">Visitor / self-reported reviewer</option>
+              <option value="project_author">Project author</option>
+            </select>
+          </div>
+          <div class="session-actions">
+            <button id="export-review" type="button" class="secondary">Download reviews</button
+            ><label class="import-label" for="import-review">Import JSON</label
+            ><input id="import-review" type="file" accept=".json,application/json" />
+          </div>
+          <p id="storage-state" class="storage-state" role="status"></p>
+        </section>
+        <section class="import-confirm" id="import-confirm" aria-labelledby="import-title" hidden>
+          <h2 id="import-title" tabindex="-1">Replace this session?</h2>
+          <p id="import-description"></p>
+          <p>Download your current work first if you want to keep both sessions.</p>
+          <div class="review-actions">
+            <button id="confirm-import" class="primary" type="button">
+              Replace with imported reviews</button
+            ><button id="cancel-import" class="secondary" type="button">
+              Keep current session
+            </button>
+          </div>
+        </section>
+        <div class="review-grid">
+          <aside class="review-queue" aria-label="Case navigation">
+            <p class="eyebrow">Your review queue</p>
+            <p id="review-progress" class="review-progress"></p>
+            <progress id="review-meter" max="20" value="0" aria-label="Completed reviews"></progress
+            ><label for="review-case">Choose a request</label
+            ><select id="review-case"></select>
+            <p class="helper">
+              You can skip a case and return later. Saving a review does not send or execute
+              anything.
+            </p>
+            <a href="#review-results" class="text-link">Review totals ↓</a>
+          </aside>
+          <article class="review-work" aria-labelledby="case-title">
+            <div class="review-case-heading">
+              <h2 id="case-title" tabindex="-1"></h2>
+              <span id="review-language" class="tag"></span>
+            </div>
+            <p class="eyebrow">Customer request · synthetic</p>
+            <blockquote id="review-source" class="request-text"></blockquote>
+            <form id="initial-form" class="review-form">
+              <p class="eyebrow">01 · Your initial assessment</p>
+              <h3>What does this request need?</h3>
+              <p class="helper">
+                The model response and provisional labels appear later. Your saved initial
+                assessment stays separate from any later changes.
+              </p>
+              <div id="initial-fields" class="assessment-fields"></div>
+              <button class="primary" type="submit">Save assessment &amp; reveal response</button>
+            </form>
+            <div id="candidate-stage" hidden>
+              <details class="initial-record">
+                <summary>Your saved initial assessment</summary>
+                <p id="initial-record-text"></p>
+              </details>
+              <section class="candidate-panel" aria-labelledby="candidate-title">
+                <p class="eyebrow">02 · Recorded V2 response</p>
+                <h3 id="candidate-title" tabindex="-1">Check the meaning, not just the format.</h3>
+                <p id="candidate-summary" class="candidate-summary"></p>
+                <dl id="candidate-facts" class="candidate-facts"></dl>
+                <p class="eyebrow">Evidence supplied by the model</p>
+                <ul id="candidate-evidence" class="candidate-evidence"></ul>
+                <p id="candidate-validation" class="validation-note"></p>
+                <details>
+                  <summary>Inspect recorded JSON</summary>
+                  <pre id="candidate-json" class="review-code"></pre>
+                </details>
+              </section>
+              <form id="final-form" class="review-form">
+                <p class="eyebrow">03 · Your reviewed decision</p>
+                <h3 id="final-title" tabindex="-1">Would you accept this candidate?</h3>
+                <p class="helper">
+                  Check the summary against the request. Update your assessments below if needed.
+                  These changes do not overwrite your initial assessment.
+                </p>
+                <div id="final-fields" class="assessment-fields"></div>
+                <div class="judgment-fields">
+                  <div>
+                    <label for="summary-rating">Summary accuracy</label
+                    ><select id="summary-rating" required>
+                      <option value="">Choose a rating</option>
+                      <option value="accurate">Accurate</option>
+                      <option value="partly_accurate">Partly accurate</option>
+                      <option value="inaccurate">Inaccurate</option>
+                      <option value="unclear">Unclear</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="review-disposition">Candidate decision</label
+                    ><select id="review-disposition" required>
+                      <option value="">Choose a decision</option>
+                      <option value="acceptable">Acceptable</option>
+                      <option value="needs_correction">Needs correction</option>
+                      <option value="unresolved">Unresolved</option>
+                    </select>
+                  </div>
+                </div>
+                <label for="review-notes">Reason / review notes</label
+                ><textarea
+                  id="review-notes"
+                  maxlength="2000"
+                  rows="3"
+                  aria-describedby="notes-help"
+                  placeholder="What is missing, incorrect or ambiguous?"
+                ></textarea>
+                <p id="notes-help" class="helper">
+                  Required for corrections and unresolved reviews. Up to 2,000 characters. Use
+                  synthetic examples only.
+                </p>
+                <div class="review-actions">
+                  <button id="save-final" class="primary" type="submit">Save review</button
+                  ><span id="revision-count" class="helper"></span>
+                </div>
+              </form>
+              <section
+                id="label-comparison"
+                class="label-comparison"
+                aria-labelledby="comparison-title"
+                hidden
+              >
+                <p class="eyebrow">04 · Compare after deciding</p>
+                <h3 id="comparison-title" tabindex="-1">The provisional labels</h3>
+                <p>
+                  These labels were authored with AI. Agreement is not proof of correctness, and a
+                  disagreement can be worth investigating.
+                </p>
+                <p id="provisional-values"></p>
+                <p id="comparison-values"></p>
+                <details>
+                  <summary>Saved review history</summary>
+                  <ol id="review-history"></ol>
+                </details>
+              </section>
+            </div>
+            <div class="case-controls">
+              <button id="previous-case" type="button" class="secondary">Previous</button
+              ><button id="next-case" type="button" class="secondary">Skip / next request →</button>
+            </div>
+          </article>
+        </div>
+        <section id="review-results" class="review-results" aria-labelledby="results-title">
+          <p class="eyebrow">This session only</p>
+          <h2 id="results-title">What your reviews show</h2>
+          <p id="results-context"></p>
+          <div id="result-counts" class="result-counts"></div>
+          <h3>Summary ratings</h3>
+          <p id="summary-counts"></p>
+          <details id="comparison-details">
+            <summary>Agreement with model and provisional labels</summary>
+            <p>
+              Only saved reviews contribute. “Not sure” assessments and rejected model candidates
+              are excluded from the relevant denominator. Final assessments were made after seeing
+              the candidate.
+            </p>
+            <div id="agreement-tables"></div>
+          </details>
+          <p class="helper">
+            These are self-reported judgments on a development set, not an independent benchmark.
+            Your browser does not publish them.
+          </p>
+        </section>
+      </div>
+      <section id="review-method" class="review-method">
+        <h2>A small, inspectable review process.</h2>
+        <div class="method-columns">
+          <div>
+            <h3>Read before revealing</h3>
+            <p>
+              Make an initial assessment from the request alone. Choose “Not sure” when the request
+              does not support a confident decision. Then inspect the recorded response and save
+              your final review.
+            </p>
+          </div>
+          <div>
+            <h3>Keep the distinction</h3>
+            <p>
+              The validator checks structure and exact quotes. You judge whether the summary is
+              faithful and the routing makes sense. A completed review may still be unresolved.
+            </p>
+          </div>
+          <div>
+            <h3>Know the limits</h3>
+            <p>
+              The requests are synthetic, and their provisional labels were AI-authored. This staged
+              display reduces immediate prompting by the answer; it is not a secure blind study.
+              Files and reviewer labels are not authenticated.
+            </p>
+          </div>
+        </div>
+        <details>
+          <summary>Assessment guide</summary>
+          <p>
+            <strong>Category:</strong> Billing covers invoices and payments; technical covers broken
+            product behavior; account covers access, identity and security; other covers requests
+            outside those groups.
+          </p>
+          <p>
+            <strong>Priority:</strong> Urgent means a time-sensitive impact requiring immediate
+            attention. A financial topic alone does not establish urgency.
+          </p>
+          <p>
+            <strong>Specialist review:</strong> Choose yes for requested financial actions, security
+            incidents or legal disputes. Urgent requests also require additional review under V2.
+            The presence of a keyword alone is insufficient.
+          </p>
+          <p>
+            <strong>Summary:</strong> Accurate means faithful to the request without unsupported
+            additions or material omissions. Partly accurate means a useful summary with a material
+            issue. Inaccurate means it contradicts or misrepresents the request. Unclear means you
+            cannot judge reliably.
+          </p>
+          <p>
+            <strong>Decision:</strong> Acceptable requires an accurate summary and agreement with
+            the candidate's category, priority and routing. Needs correction requires a reason.
+            Unresolved records uncertainty rather than forcing a decision.
+          </p>
+        </details>
+        <p>
+          <a href="https://github.com/leonbede7/intake-eval/blob/main/docs/human-review.md"
+            >Read the method and export format ↗</a
+          >
+        </p>
+      </section>
+    </main>
+    <footer class="review-footer">
+      Intake Eval · Built with AI assistance. Review records are local observations, not customer
+      actions.
+    </footer>
+  </body>
+</html>

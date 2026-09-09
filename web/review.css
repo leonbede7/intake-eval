@@ -1,0 +1,436 @@
+.review-page [hidden] {
+  display: none !important;
+}
+.review-page main {
+  max-width: 1280px;
+  margin: auto;
+  padding: 0 36px;
+}
+.review-intro {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 70px;
+  padding: 64px 0 40px;
+  align-items: end;
+}
+.review-intro h1 {
+  font-size: clamp(38px, 5vw, 66px);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  margin: 16px 0 22px;
+}
+.review-intro .lede {
+  max-width: 560px;
+}
+.review-context {
+  border-left: 2px solid var(--blue);
+  padding: 6px 0 6px 22px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.review-context p {
+  color: var(--muted);
+}
+.review-page label {
+  display: block;
+  margin: 0 0 9px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.review-page input:not([type='file']),
+.review-page select,
+.review-page textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #a9bbcc;
+  border-radius: 4px;
+  color: var(--ink);
+  background: white;
+  padding: 12px;
+  font: inherit;
+  font-size: 14px;
+}
+.review-page select {
+  min-height: 46px;
+}
+.review-page textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+.review-page button {
+  min-height: 44px;
+  white-space: normal;
+}
+.review-page h2 {
+  letter-spacing: -0.025em;
+  font-size: 28px;
+}
+.review-page h3 {
+  font-size: 20px;
+  line-height: 1.3;
+  margin: 12px 0;
+}
+.review-page .helper {
+  line-height: 1.65;
+  font-size: 13px;
+}
+.review-message {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: var(--green);
+}
+.review-message:empty {
+  margin: 0;
+}
+.session-bar {
+  padding: 24px;
+  background: #eaf0f6;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr;
+  gap: 20px;
+  border-block: 1px solid var(--line);
+}
+.optional {
+  font-weight: 400;
+}
+.session-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 12px;
+}
+.session-actions input[type='file'] {
+  width: 100%;
+  font-size: 12px;
+}
+.session-actions .import-label {
+  margin: 0;
+}
+.storage-state {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+.storage-state.unsaved {
+  color: var(--red);
+  font-weight: 700;
+}
+.review-grid {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: 42px;
+  margin: 40px 0 60px;
+}
+.review-queue {
+  align-self: start;
+  position: sticky;
+  top: 24px;
+}
+.review-progress {
+  font-size: 25px;
+  font-weight: 700;
+  margin: 18px 0 8px;
+  letter-spacing: -0.03em;
+}
+.review-queue progress {
+  width: 100%;
+  height: 6px;
+  accent-color: var(--blue);
+  margin: 0 0 25px;
+}
+.review-work {
+  min-width: 0;
+  background: white;
+  padding: 32px;
+  border: 1px solid var(--line);
+}
+.review-case-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+.review-case-heading h2 {
+  margin: 0;
+}
+.request-text {
+  font-size: 19px;
+  line-height: 1.75;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin: 14px 0 32px;
+  padding: 0 0 28px;
+  border-bottom: 1px solid var(--line);
+}
+.review-form {
+  margin: 28px 0;
+}
+.assessment-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 24px 0;
+}
+.judgment-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.initial-record {
+  font-size: 13px;
+  padding: 16px;
+  background: var(--paper);
+}
+.review-page summary {
+  cursor: pointer;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.review-page summary:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 5px;
+}
+.initial-record p {
+  line-height: 1.7;
+}
+.candidate-panel {
+  margin: 28px 0;
+  padding: 24px;
+  background: var(--soft);
+  border-left: 3px solid var(--blue);
+}
+.candidate-summary {
+  font-size: 18px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.candidate-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 30px;
+  margin: 24px 0;
+}
+.candidate-facts dt {
+  font-size: 12px;
+  color: var(--muted);
+}
+.candidate-facts dd {
+  margin: 6px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+.candidate-evidence {
+  padding-left: 20px;
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.candidate-evidence li + li {
+  margin-top: 8px;
+}
+.validation-note {
+  font-size: 13px;
+  line-height: 1.65;
+  border-top: 1px solid #c5d3eb;
+  padding-top: 16px;
+}
+.review-code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font: 12px/1.7 monospace;
+}
+.review-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+.label-comparison {
+  border-top: 1px solid var(--line);
+  margin-top: 30px;
+  padding: 25px 0 0;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.label-comparison ol {
+  padding-left: 24px;
+}
+.label-comparison li {
+  padding: 8px 0;
+  overflow-wrap: anywhere;
+}
+.case-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+  margin-top: 30px;
+}
+.review-results {
+  border-top: 2px solid var(--ink);
+  padding: 28px 0 40px;
+}
+.result-counts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-block: 1px solid var(--line);
+  margin: 24px 0;
+  padding: 24px 0;
+  gap: 20px;
+}
+.result-counts strong {
+  display: block;
+  font-size: 32px;
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+}
+.result-counts span {
+  color: var(--muted);
+  font-size: 13px;
+}
+.review-results p,
+.review-method p {
+  line-height: 1.7;
+  max-width: 85ch;
+  overflow-wrap: anywhere;
+}
+.review-results table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 24px 0;
+  table-layout: fixed;
+}
+.review-results caption {
+  text-align: left;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.review-results th,
+.review-results td {
+  text-align: left;
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+.review-results th:first-child {
+  width: 31%;
+}
+.review-method {
+  padding: 32px 0;
+  border-top: 1px solid var(--line);
+}
+.method-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 36px;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+.review-footer {
+  padding: 24px 36px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+.import-confirm {
+  border: 2px solid var(--blue);
+  background: white;
+  padding: 24px;
+  margin: 24px 0;
+}
+.import-confirm p {
+  line-height: 1.6;
+}
+@media (max-width: 1000px) {
+  .session-bar {
+    grid-template-columns: 1fr 1fr;
+  }
+  .session-actions {
+    grid-column: 1/-1;
+  }
+  .review-grid {
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 24px;
+  }
+  .assessment-fields {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 700px) {
+  .review-page main {
+    padding: 0 20px;
+  }
+  .review-intro {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-top: 36px;
+  }
+  .session-bar {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+  .review-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 24px;
+  }
+  .review-queue {
+    position: static;
+  }
+  .review-queue .helper {
+    margin-bottom: 12px;
+  }
+  .review-work {
+    padding: 20px;
+  }
+  .review-case-heading {
+    margin-bottom: 22px;
+  }
+  .request-text {
+    font-size: 17px;
+  }
+  .judgment-fields {
+    grid-template-columns: 1fr;
+  }
+  .candidate-panel {
+    padding: 18px;
+  }
+  .result-counts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .result-counts strong {
+    font-size: 28px;
+  }
+  .method-columns {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .case-controls {
+    flex-wrap: wrap;
+  }
+  .review-results th,
+  .review-results td {
+    padding: 10px 4px;
+    font-size: 12px;
+  }
+  .review-page .topbar {
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .review-page .topbar nav {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .review-page {
+    scroll-behavior: auto;
+  }
+}

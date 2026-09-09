@@ -599,6 +599,8 @@ footer {
   nav {
     order: 3;
     width: 100%;
+    flex-wrap: wrap;
+    gap: 14px 20px;
     justify-content: space-between;
     border-top: 1px solid var(--line);
     padding-top: 14px;
