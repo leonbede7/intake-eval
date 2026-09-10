@@ -5,6 +5,10 @@ permissions:
 jobs:
   check:
     runs-on: ubuntu-latest
+    container:
+      # Match the pinned @playwright/test version in package.json.
+      image: mcr.microsoft.com/playwright:v1.63.0-noble
+      options: --user 1001
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
@@ -14,8 +18,17 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
-      - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
+      - name: Reproduce the offline evidence
+        run: npm run evidence -- --out local-data/ci-evidence
+      - name: Upload the evidence packet
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: offline-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: local-data/ci-evidence/
+          if-no-files-found: warn
+          retention-days: 14
       - uses: actions/upload-pages-artifact@v4
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:

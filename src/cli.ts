@@ -36,7 +36,7 @@ async function main() {
   const report = evaluate(parseCases(parsed));
   if (json) console.log(JSON.stringify(report, null, 2));
   else {
-    console.log('INTAKE EVAL — synthetic regression suite\n');
+    console.log('INTAKE EVAL: synthetic regression suite\n');
     for (const result of report.results)
       console.log(
         `${result.passed ? 'PASS' : 'FAIL'}  ${result.id} → ${result.decision}${result.queue ? ` / ${result.queue}` : ''}`,

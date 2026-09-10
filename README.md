@@ -4,6 +4,16 @@
 
 **[Open the playground](https://leonbede7.github.io/intake-eval/)** · [Read the policy comparison](docs/routing-experiment.md)
 
+**Reviewing this repository?** Start with the [short reviewer guide](docs/reviewer-guide.md): one browser example, the relevant source files and a reproducible evidence packet.
+
+```bash
+git clone https://github.com/leonbede7/intake-eval.git
+cd intake-eval
+npm run evidence
+```
+
+Node.js 24+, no dependency installation or API key needed for this command. It revalidates saved model responses, checks the published results and runs the offline fault harness. Open the printed `report.md` path. Recorded timings stay labeled as historical; no new model run or human evaluation is claimed. CI also provides a downloadable **offline-evidence** artifact when this reproduction step runs.
+
 **[Try human review](https://leonbede7.github.io/intake-eval/review.html):** assess a synthetic request before revealing its recorded V2 response. Check the summary, save your decision, and compare it with the provisional labels. Initial assessments and later revisions stay separate. Progress stays in your browser, with validated JSON import and export. No human results are prefilled. [Review guide and data format](docs/human-review.md).
 
 **[Explore the failure lab](https://leonbede7.github.io/intake-eval/reliability.html):** reproducible local HTTP faults test deadlines, connection failures, invalid bytes and validation. The suite found and fixed a UTF-8 decoding issue. It also demonstrates why exact quotes cannot establish summary truthfulness. [Method and before/after evidence](docs/reliability.md).
